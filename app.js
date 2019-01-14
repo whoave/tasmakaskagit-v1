@@ -296,7 +296,7 @@ kurtariciFonk = () =>{
   if(sonucAI > 10){
     skorBilgisayar+=5;
     skorBilgisayar_span.innerHTML = skorBilgisayar.toString().fontcolor("green");
-    yukseltmePuani-=7;
+    yukseltmePuani+=7;
   }
 }
 kurtariciButon = () =>{
