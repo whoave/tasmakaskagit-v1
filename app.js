@@ -10,7 +10,7 @@ const bilgi = document.getElementById('bilgi');
 const durum = document.querySelector('.durum');
 
 // bilgisayar adına rastgele oynatma
-rastgelePC = function(){
+rastgelePC = () => {
   let pcKarar = Math.floor(Math.random()*3);
   switch (pcKarar) {
     case 0:
@@ -28,7 +28,7 @@ rastgelePC = function(){
 
 
 // oyun kontrolleri ile zafer,bozgun ve beraberlik hesaplama
-savasiBaslat = function(pc,insan){
+savasiBaslat = (pc,insan) => {
     switch (insan+pc) {
       case 'tm':
       case 'kt':
@@ -49,7 +49,7 @@ savasiBaslat = function(pc,insan){
 }
 
 // kısayol harflerini metine çevirme
-metinlestir = function(harf){
+metinlestir = (harf) => {
   switch (harf) {
     case 't':
       return 'Taş';
@@ -64,7 +64,7 @@ metinlestir = function(harf){
 }
 
 // bilgi çubuğunda oynanan el hakkında bilgi döndürme
-bilgiVer = function(durumAtak,pc,insan){
+bilgiVer = (durumAtak,pc,insan) => {
   // bilgi metni içerisindeki küçük renkli yazılar
   const pcKisa = 'pc'.fontsize(2).sup().fontcolor('red');
   const insanKisa = 'insan'.fontsize(2).sup().fontcolor('green');
@@ -73,19 +73,19 @@ bilgiVer = function(durumAtak,pc,insan){
     bilgi.innerHTML=`${metinlestir(pc)}${pcKisa}, ${metinlestir(insan)}${insanKisa} ile yok edildi. Kazandın!`;
     skorInsan_span.innerHTML = skorInsan;
     document.getElementById(insan).classList.add('yesil');
-    setInterval(function(){document.getElementById(insan).classList.remove('yesil')},400);
+    setInterval(()=>{document.getElementById(insan).classList.remove('yesil')},400);
   }
   if(durumAtak=="bilgisayarKazandi"){
     skorBilgisayar++;
     bilgi.innerHTML=`${metinlestir(pc)}${pcKisa} ile ${metinlestir(insan)}${insanKisa} mahvedildi. Kaybettin!`;
     skorBilgisayar_span.innerHTML = skorBilgisayar;
     document.getElementById(insan).classList.add('kirmizi');
-    setInterval(function(){document.getElementById(insan).classList.remove('kirmizi')},400);
+    setInterval(()=>{document.getElementById(insan).classList.remove('kirmizi')},400);
   }
   if(durumAtak=="berabere"){
     bilgi.innerHTML=`${metinlestir(pc)}${pcKisa} ve ${metinlestir(insan)}${insanKisa}. Berabere!`;
     document.getElementById(insan).classList.add('gri');
-    setInterval(function(){document.getElementById(insan).classList.remove('gri')},400);
+    setInterval(()=>{document.getElementById(insan).classList.remove('gri')},400);
   }
 }
 
@@ -106,16 +106,16 @@ durumSeviye = () => {
 
 }
 // başlatma fonksiyoonu ile tuşlara tıklama kontrolü
-baslat = function(){
-  secimTas.addEventListener('click',function(){
+baslat = () =>{
+  secimTas.addEventListener('click',() => {
     let pc = rastgelePC();
     savasiBaslat(pc,'t');
   });
-  secimMakas.addEventListener('click',function(){
+  secimMakas.addEventListener('click',() => {
     let pc = rastgelePC();
     savasiBaslat(pc,'m');
   });
-  secimKagit.addEventListener('click',function(){
+  secimKagit.addEventListener('click',() => {
     let pc = rastgelePC();
     savasiBaslat(pc,'k');
   });
