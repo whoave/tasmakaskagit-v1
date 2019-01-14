@@ -240,6 +240,12 @@ baslat = () =>{
 // yükseltme kontrolcüsü
 yukseltmeKontrol = () => {
   yukPuani_i.innerHTML = yukseltmePuani;
+  
+  // yükseltme gösterici
+  yukseltKagit.innerHTML = "+ ("+kagitHasar+")";
+  yukseltMakas.innerHTML = "+ ("+makasHasar+")";
+  yukseltTas.innerHTML = "+ ("+tasHasar+")";
+
   if(yukseltmePuani > 0){
     for(var x = 0;x<3;x++){
       document.querySelector(".secimler").getElementsByTagName("span")[x].classList.add('yesil');
@@ -282,16 +288,24 @@ yukseltmeYap = () =>{
 
 kurtariciFonk = () =>{
   let sonuc = skorBilgisayar - skorInsan;
+  let sonucAI = skorInsan - skorBilgisayar;
   if(sonuc > 10){
     kurtarici.setAttribute("style","display:inline-block !important;");
+  }
+
+  if(sonucAI > 10){
+    skorBilgisayar+=5;
+    skorBilgisayar_span.innerHTML = skorBilgisayar.toString().fontcolor("green");
+    yukseltmePuani-=7;
   }
 }
 kurtariciButon = () =>{
   kurtarici.addEventListener("click",()=>{
     kurtarici.setAttribute("style","display:none !important;");
     skorBilgisayar-=5;
-    skorBilgisayar_span.innerHTML = skorBilgisayar;
+    skorBilgisayar_span.innerHTML = skorBilgisayar.toString().fontcolor("red");
     yukseltmePuani+=7;
+    yukPuani_i.innerHTML = yukseltmePuani.toString().fontcolor("green");
   });
 }
 
