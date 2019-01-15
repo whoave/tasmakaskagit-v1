@@ -12,6 +12,7 @@ const kurtarici = document.getElementById("kurtar");
 const yukPuani_i = document.getElementsByClassName('yukPuani')[0].getElementsByTagName("i")[0];
 let yukseltmePuani=0;
 let pcYukseltmePuani=0;
+let hamleler = [];
 //hasarlar
 let tasHasar = 1;
 let makasHasar = 1;
@@ -24,6 +25,13 @@ let pckHasar = 1;
 const yukseltTas = document.getElementById("yukseltTas");
 const yukseltKagit = document.getElementById("yukseltKagit");
 const yukseltMakas = document.getElementById("yukseltMakas");
+// limit kilitleri
+const tasKilit = document.getElementById("tasLimit");
+const kagitKilit = document.getElementById("kagitLimit");
+const makasKilit = document.getElementById("makasLimit");
+let cezaPuani = 0;
+let cezali = "";
+
 
 // bilgisayar adına rastgele oynatma
 rastgelePC = () => {
@@ -223,16 +231,25 @@ durumSeviye = () => {
 // başlatma fonksiyoonu ile tuşlara tıklama kontrolü
 baslat = () =>{
   secimTas.addEventListener('click',() => {
+    if (cezali != "taş"){
+    hamleKaydet("t");
     let pc = rastgelePC();
     savasiBaslat(pc,'t');
+    }
   });
   secimMakas.addEventListener('click',() => {
+    if (cezali != "makas"){
+    hamleKaydet("m");
     let pc = rastgelePC();
     savasiBaslat(pc,'m');
+    }
   });
   secimKagit.addEventListener('click',() => {
+    if (cezali != "kağıt"){
+    hamleKaydet("k");
     let pc = rastgelePC();
     savasiBaslat(pc,'k');
+    }
   });
 } 
 
@@ -262,6 +279,7 @@ yukseltmeKontrol = () => {
 
 }
 
+// yükseltme yapma fonskiyonu
 yukseltmeYap = () =>{
 
       //kagit secilirse
@@ -286,6 +304,8 @@ yukseltmeYap = () =>{
 
 }
 
+
+// çok yenilince kurtarma butonu
 kurtariciFonk = () =>{
   let sonuc = skorBilgisayar - skorInsan;
   let sonucAI = skorInsan - skorBilgisayar;
@@ -309,13 +329,136 @@ kurtariciButon = () =>{
   });
 }
 
+
+// oyuncu hamlelerini kaydet
+hamleKaydet = (yeniHamle) =>{
+
+  hamleler[0] = hamleler[1];
+  hamleler[1] = hamleler[2];
+  hamleler[2] = hamleler[3];
+  hamleler[3] = hamleler[4];
+  hamleler[4] = hamleler[5];
+  hamleler[5] = hamleler[6];
+  hamleler[6] = hamleler[7];
+  hamleler[7] = hamleler[8];
+  hamleler[8] = hamleler[9];
+  hamleler[9] = yeniHamle;
+
+  cezaPuani--;
+
+  if(cezaPuani < 0){
+    cezaPuani = 0;
+  }
+
+  hamleLimit(hamleler);
+}
+
+// hamlelere limit koy
+hamleLimit = (hamleListesi)=>{ 
+
+  let tAdet = 0;
+  let mAdet = 0;
+  let kAdet = 0;
+  // kullanılan hamleleri depola
+  hamleListesi.forEach(element => {
+    if(element == "t"){
+      tAdet++
+    }
+    if(element == "m"){
+      mAdet++;
+    }
+    if(element == "k"){
+      kAdet++;
+    }
+  });
+  // eğer cezalı yoksa
+  if(cezali == ""){
+    //hamle limiti koy
+    if(tAdet >= 7){
+      cezaPuani = 3;
+      cezali = "taş";
+      tAdet = 0; 
+    }
+    if(mAdet >= 7){
+      cezaPuani = 3;
+      cezali = "makas";
+    }
+    if(kAdet >= 7){
+      cezaPuani = 3;
+      cezali = "kağıt";
+    }
+  }
+
+
+}
+
+// Ceza verici ve kontrolcüsü
+cezaci = () =>{
+  if(cezali == "taş"){
+    if(cezaPuani > 0){
+      tasKilit.setAttribute("style","display:inline-block;");
+      secimTas.classList.add('limitKilidi');
+      durum.innerHTML = "Taşa 3 Tur ceza".fontcolor("red");
+      tasKilit.innerHTML=cezaPuani;
+    }else{
+      cezali = "";
+    }
+  }else{
+    tasKilit.setAttribute("style","display:none;");
+    secimTas.classList.remove('limitKilidi');
+  }
+
+
+
+  if(cezali == "kağıt"){
+    if(cezaPuani > 0){
+      kagitKilit.setAttribute("style","display:inline-block;");
+      secimKagit.classList.add('limitKilidi');
+      durum.innerHTML = "Kağıda 3 Tur ceza".fontcolor("red");
+      kagitKilit.innerHTML=cezaPuani;
+    }else{
+      cezali = "";
+    }
+  }else{
+    kagitKilit.setAttribute("style","display:none;");
+    secimKagit.classList.remove('limitKilidi');
+  }
+
+
+
+
+  if(cezali == "makas"){
+    if(cezaPuani > 0){
+      makasKilit.setAttribute("style","display:inline-block;");
+      secimMakas.classList.add('limitKilidi');
+      durum.innerHTML = "Makasa 3 Tur ceza".fontcolor("red");
+      makasKilit.innerHTML=cezaPuani;
+    }else{
+      cezali = "";
+    }
+  }else{
+    makasKilit.setAttribute("style","display:none;");
+    secimMakas.classList.remove('limitKilidi');
+  }
+
+  
+}
+
+
+
+
+
+
 // oyunu başlatma ve durum çubuğu kontrollerini başlatma
 setInterval(yukseltmeKontrol,100);
 setInterval(durumSeviye,100);
+setInterval(cezaci,100);
 setInterval(kurtariciFonk,300);
 kurtariciButon();
 yukseltmeYap();
 baslat();
+
+
 
 
 
