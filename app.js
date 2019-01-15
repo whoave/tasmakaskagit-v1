@@ -69,19 +69,19 @@ savasiBaslat = (pc,insan) => {
 
 
       case 'tm':
-      if(tasHasar > pctHasar)
+      if(tasHasar >= pcmHasar)
         bilgiVer("insanKazandi",pc,insan);
       else
         bilgiVer("bilgisayarKazandi",pc,insan);
       break;
       case 'kt':
-      if(kagitHasar > pckHasar)
+      if(kagitHasar >= pctHasar)
         bilgiVer("insanKazandi",pc,insan);
       else
         bilgiVer("bilgisayarKazandi",pc,insan);
       break;
       case 'mk':
-      if(makasHasar > pcmHasar)
+      if(makasHasar >= pckHasar)
         bilgiVer("insanKazandi",pc,insan);
       else
         bilgiVer("bilgisayarKazandi",pc,insan);
@@ -89,22 +89,22 @@ savasiBaslat = (pc,insan) => {
 
 
       case 'mt':
-      if(pcmHasar > tasHasar)
-        bilgiVer("bilgisayarKazandi",pc,insan);
-      else
+      if(makasHasar > pctHasar)
         bilgiVer("insanKazandi",pc,insan);
+      else
+        bilgiVer("bilgisayarKazandi",pc,insan);
       break;
       case 'tk':
-      if(pctHasar > kagitHasar)
-        bilgiVer("bilgisayarKazandi",pc,insan);
-      else
+      if(tasHasar > pckHasar)
         bilgiVer("insanKazandi",pc,insan);
+      else
+        bilgiVer("bilgisayarKazandi",pc,insan);
       break;
       case 'km':
-      if(pckHasar > makasHasar)
-        bilgiVer("bilgisayarKazandi",pc,insan);
-      else
+      if(kagitHasar > pcmHasar)
         bilgiVer("insanKazandi",pc,insan);
+      else
+        bilgiVer("bilgisayarKazandi",pc,insan);
       break;
 
 
