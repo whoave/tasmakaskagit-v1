@@ -316,7 +316,8 @@ kurtariciFonk = () =>{
   if(sonucAI > 10){
     skorBilgisayar+=5;
     skorBilgisayar_span.innerHTML = skorBilgisayar.toString().fontcolor("green");
-    yukseltmePuani+=7;
+    pcYukseltmePuani+=3;
+    yukseltmePuani+=1;
   }
 }
 kurtariciButon = () =>{
@@ -325,6 +326,7 @@ kurtariciButon = () =>{
     skorBilgisayar-=5;
     skorBilgisayar_span.innerHTML = skorBilgisayar.toString().fontcolor("red");
     yukseltmePuani+=7;
+    pcYukseltmePuani+=1;
     yukPuani_i.innerHTML = yukseltmePuani.toString().fontcolor("green");
   });
 }
