@@ -256,6 +256,8 @@ baslat = () =>{
 
 // yükseltme kontrolcüsü
 yukseltmeKontrol = () => {
+  rastgeleYukseltmePC();
+
   yukPuani_i.innerHTML = yukseltmePuani;
   
   // yükseltme gösterici
